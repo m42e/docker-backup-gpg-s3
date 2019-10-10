@@ -1,15 +1,19 @@
 #!/bin/sh
 
-BACKUP_DATE=$(date +"%Y-%m-%d_%H-%M")
+BACKUP_DATE=$(date +"%Y-%m-%d")
 BACKUP_BASENAME=$S3_BUCKET_NAME$BACKUP_DATE.tar
 SKIP_XZ=${ONLY_TAR:0}
 
+month_day=`date +"%d"`
+
 if [ $SKIP_XZ -ne 0 ]; then
   TAR_PARAM=
-  BACKUP_FILENAME=$BACKUP_BASENAME
+  BACKUP_FILENAME=daily_$BACKUP_BASENAME
+  BACKUP_FILENAME_MONTHLY=monthly_$BACKUP_BASENAME
 else
   TAR_PARAM=-J
-  BACKUP_FILENAME=$BACKUP_BASENAME.xz
+  BACKUP_FILENAME=daily_$BACKUP_BASENAME.xz
+  BACKUP_FILENAME_MONTHLY=monthly_$BACKUP_BASENAME.xz
 fi
 
 cd /backup
@@ -27,3 +31,9 @@ echo "uploading"
 aws s3 cp ~/$BACKUP_FILENAME.gpg s3://$S3_BUCKET_NAME/$BACKUP_FILENAME.gpg --storage-class STANDARD_IA
 rm ~/$BACKUP_FILENAME.gpg
 echo "done"
+
+# On first month day do
+if [ "$month_day" -eq 1 ] ; then
+  echo "make monthly backup"
+  aws s3 s3://$S3_BUCKET_NAME/$BACKUP_FILENAME.gpg s3://$S3_BUCKET_NAME/$BACKUP_FILENAME_MONTHLY.gpg --storage-class DEEP_ARCHIVE
+fi
