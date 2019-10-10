@@ -4,6 +4,7 @@ MAINTAINER technik@myfoodmap.de
 RUN apk add --update \
     py-pip \
     gpgme \
+    sed \
     xz \
     && rm -rf /var/cache/apk/*
 
