@@ -1,9 +1,10 @@
-FROM alpine:3.4
-MAINTAINER technik@myfoodmap.de
+FROM alpine:3.10
+MAINTAINER matthias@bilger.info
 
 RUN apk add --update \
     py-pip \
     gpgme \
+    tar \
     sed \
     xz \
     && rm -rf /var/cache/apk/*
