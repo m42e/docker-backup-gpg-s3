@@ -2,7 +2,7 @@
 
 BACKUP_DATE=$(date +"%Y-%m-%d")
 BACKUP_BASENAME=$S3_BUCKET_NAME$BACKUP_DATE.tar
-SKIP_XZ=${ONLY_TAR:0}
+SKIP_XZ=${ONLY_TAR:-0}
 
 month_day=`date +"%d"`
 
