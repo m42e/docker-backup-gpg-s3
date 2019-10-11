@@ -4,6 +4,7 @@ MAINTAINER matthias@bilger.info
 RUN apk add --update \
     py-pip \
     gpgme \
+		curl \
     tar \
     sed \
     xz \
