@@ -8,4 +8,4 @@ echo "$CRON_INTERVAL /backup.sh" >> /backup.cron
 
 crontab /backup.cron
 
-tail -f /dev/null
+crond -f -d 8
