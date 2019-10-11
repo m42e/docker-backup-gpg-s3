@@ -20,6 +20,7 @@ cd /backup
 echo "make archive"
 tar -c --checkpoint=.1000 ${TAR_PARAM} -f ~/$BACKUP_FILENAME ./*
 cd /
+echo " done"
 
 RECIPIENT=$(echo "$GPG_RECIPIENT" | sed "s/,/ --recipient /")
 
