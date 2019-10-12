@@ -26,7 +26,6 @@ healthchck_fail(){
 healthchck_ok(){
 	if [ -n $HEALTHCHECK_URL ]; then
 	 	curl --retry 3 $HEALTHCHECK_URL
-		exit 1
 	fi
 }
 
