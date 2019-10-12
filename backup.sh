@@ -32,7 +32,7 @@ healthchck_ok(){
 
 cd /backup
 echo "make archive"
-tar -c --checkpoint=.1000 ${TAR_PARAM} -f ~/$BACKUP_FILENAME ./* || healthchck_fail
+tar -c --checkpoint=.1000 ${TAR_PARAM} ${TAR_EXTRA_PARAM} -f ~/$BACKUP_FILENAME ./* || healthchck_fail
 cd /
 echo " done"
 
